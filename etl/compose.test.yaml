@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  test-runner-master:
+    container_name: test-runner-master
+    image: lastfm/etl/pyspark/tests
+    build:
+      dockerfile: Dockerfile.test
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_MEMORY=2G
+    ports:
+      - '8090:8080'
+      - '4042:4040'
+    networks:
+      - etl-test
+  test-runner-worker:
+    container_name: test-runner-worker
+    image: lastfm/etl/pyspark/tests
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://test-runner-master:7077
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=1
+    networks:
+      - etl-test
+
+networks:
+  etl-test:
+

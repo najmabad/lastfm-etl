@@ -1,0 +1,9 @@
+{
+    "data_directory": "data",
+    "output_directory": "results",
+    "url": "http://mtg.upf.edu/static/datasets/last.fm/lastfm-dataset-1K.tar.gz",
+    "expected_files": [
+        "lastfm-dataset-1K/userid-profile.tsv",
+        "lastfm-dataset-1K/userid-timestamp-artid-artname-traid-traname.tsv"
+    ]
+}

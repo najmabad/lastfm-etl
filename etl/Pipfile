@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+tqdm = "4.66.2"
+pandas = "2.2.2"
+py4j = "0.10.9.7"
+
+[dev-packages]
+ruff = "*"
+pytest = "*"
+isort = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.9"

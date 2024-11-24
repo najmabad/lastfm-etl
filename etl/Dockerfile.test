@@ -1,0 +1,18 @@
+FROM docker.io/bitnami/spark:3.5
+
+USER root
+RUN install_packages pipenv
+
+WORKDIR /app
+
+COPY config/test /app/config
+COPY Pipfile Pipfile.lock ./
+
+COPY etl_tasks /app/etl_tasks
+COPY tests /app/tests
+
+
+# install all the packages at the system level
+RUN pipenv install --dev --system --deploy --ignore-pipfile
+
+

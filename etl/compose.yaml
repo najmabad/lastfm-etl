@@ -1,0 +1,39 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  spark-master:
+    container_name: spark-master
+    image: lastfm/etl/pyspark/analysis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_MEMORY=4G
+    ports:
+      - "8080:8080"  # Spark master UI
+      - "4041:4040"  # Spark application UI
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+      - ./logs:/app/logs
+  spark-worker:
+    container_name: spark-worker
+    image: lastfm/etl/pyspark/analysis
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=4G
+      - SPARK_WORKER_CORES=2
+    ports:
+      - "8081:8081"  # Spark worker UI
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+      - ./logs:/app/logs
+    depends_on:
+      - spark-master
+

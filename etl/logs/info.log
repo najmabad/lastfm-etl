@@ -1,0 +1,23 @@
+2024-04-26 15:49:57 - __main__ - INFO - Importing project configurations
+2024-04-26 15:49:57 - __main__ - INFO - All configurations have been imported successfully ✅ 
+2024-04-26 15:49:57 - __main__ - INFO - ETL process start 🚀 
+2024-04-26 15:49:57 - __main__ - INFO - Fetch Last.fm 1K users data
+2024-04-26 15:49:58 - etl_tasks.extract - INFO - Required files are missing in /app/data
+2024-04-26 15:49:58 - etl_tasks.extract - INFO - Downloading the data from http://mtg.upf.edu/static/datasets/last.fm/lastfm-dataset-1K.tar.gz
+2024-04-26 15:53:28 - etl_tasks.extract - INFO - Download completed
+2024-04-26 15:53:28 - etl_tasks.extract - INFO - Unzipping the tar.gz file
+2024-04-26 15:58:08 - etl_tasks.extract - INFO - Files extracted
+2024-04-26 15:58:08 - __main__ - INFO - Fetch Completed ✅ 
+2024-04-26 15:58:08 - __main__ - INFO - Create intermediate enhanced events and sessions DataFrames
+2024-04-26 15:58:35 - etl_tasks.transform - INFO - Create Spark DataFrame from file: /app/data/lastfm-dataset-1K/userid-timestamp-artid-artname-traid-traname.tsv
+2024-04-26 15:58:55 - etl_tasks.transform - INFO - User session initialized with threshold: 20 minutes and user column: user_id
+2024-04-26 15:58:56 - etl_tasks.transform - INFO - Enhance events with session information
+2024-04-26 15:59:10 - etl_tasks.transform - INFO - Creating session DataFrame
+2024-04-26 15:59:11 - __main__ - INFO - Start analysis to compute top songs in longest sessions
+2024-04-26 15:59:11 - etl_tasks.analyze - INFO - Retrieving top 50 rows based on 'session_duration'.
+2024-04-26 15:59:11 - etl_tasks.analyze - INFO - Retrieving top 10 rows based on 'song_count'.
+2024-04-26 15:59:11 - __main__ - INFO - Loading top 10 songs from the 50 longest sessions into a TSV file
+2024-04-26 16:12:34 - etl_tasks.load - INFO - Saved DataFrame to /app/results/top_10_songs_in_50_longest_session.tsv
+2024-04-26 16:12:34 - __main__ - INFO - Completed ✅ 
+2024-04-26 16:12:34 - __main__ - INFO - ETL process completed 🎉 
+2024-04-26 16:14:15 - py4j.clientserver - INFO - Closing down clientserver connection
